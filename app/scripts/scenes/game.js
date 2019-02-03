@@ -1,4 +1,4 @@
-import Logo from '@/objects/logo';
+import Player from '@/objects/player';
 
 export default class Game extends Phaser.Scene {
   /**
@@ -19,7 +19,10 @@ export default class Game extends Phaser.Scene {
    */
   create(/* data */) {
     //  TODO: Replace this content with really cool game code here :)
-    this.logo = this.add.existing(new Logo(this));
+    this.player = this.add.existing(new Player(this, this.cameras.main.width /2, this.cameras.main.height/2));
+    this.input.keyboard.on('keydown', (event) => {
+      this.player.handle(event);
+    })
   }
 
   /**
@@ -31,6 +34,6 @@ export default class Game extends Phaser.Scene {
    *  @param {number} dt Time elapsed since last update.
    */
   update(/* t, dt */) {
-    this.logo.update();
+    this.player.update();
   }
 }

@@ -32,6 +32,38 @@ export default class Title extends Phaser.Scene {
    *  @param {object} [data={}] - Initialization parameters.
    */
   create(/* data */) {
+    const x = this.cameras.main.width /2;
+    const y = this.cameras.main.height /2;
+
+    this.add.image(x,y,'sky');
+
+    const flameParticle = this.add.particles('red');
+    const flame = flameParticle.createEmitter({
+      speed: 100,
+      scale: { start: 1, end: 0},
+      blendMode: 'ADD'
+    });
+
+    const logo = this.physics.add.image(x, 100, 'logo')
+      .setVelocity(100, -100)
+      .setBounce(1, 1)
+      .setCollideWorldBounds(true);
+
+    flame.startFollow(logo);
+
+
+    const label = this.add.text(x, 400, 'START!!', {
+      font: '64px Arial',
+      color: 'white',
+      stroke: 'black',
+      strokeThickness: 6
+    });
+
+    label
+      .setOrigin(0.5, 0.5)
+      .setInteractive();
+
+    label.on('pointerup', () => this.scene.start('Game'));
   }
 
   /**

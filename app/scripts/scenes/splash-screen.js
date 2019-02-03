@@ -34,7 +34,11 @@ export default class SplashScreen extends Phaser.Scene {
     this.showProgressBar();
 
     //  HINT: Declare all game assets to be loaded here.
-    this.load.image('logo');
+    this.load
+      .image('logo')
+      .image('sky', 'space3.png')
+      .image('red')
+      .image('car');
   }
 
   /**
@@ -46,6 +50,7 @@ export default class SplashScreen extends Phaser.Scene {
   create() {
     //  We have nothing left to do here. Start the next scene.
     this.scene.start('Title');
+    
   }
 
   //  ------------------------------------------------------------------------
